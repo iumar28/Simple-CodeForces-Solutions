@@ -1,38 +1,46 @@
+#include<bits/stdc++.h>
+using namespace std;
 
-#include <bits/stdc++.h> 
-using namespace std; 
-
-int firstNonRepeating(int arr[], int n) 
-{ 
-	for (int i = 1; i <=n; i++) { 
-		int j; 
-		for (j = 1; j <=n; j++) 
-			if (i != j && arr[i] == arr[j]) 
-				break; 
-		if (j == n) 
-			return i;
-	} 
-	return -1; 
-} 
-
-// Driver code 
-int main() 
-{ 
-	int t;
+int main()
+{
+    int t;
     cin>>t;
     while(t--)
-    {
-        int n;
+    {   int n,ans,tk,res;
+        bool flag=false;
         cin>>n;
         int a[n];
+        vector<int> v;
+        map<int,int> m;
         for(int i=1;i<=n;i++)
         {
-            cin>>a[n];
+            cin>>a[i];
+            m[a[i]]++;
         }
-        int res=firstNonRepeating(a,n);
-
-        cout<<res<<"\n";
-
+      
+       for(auto x:m)
+        {
+            if(x.second==1)
+          v.emplace_back(x.first);
+           flag=true;
+        }
+        if(v.size()==0)
+        {
+            res=-1;
+        }
+        else
+        {
+            sort(v.begin(),v.end());
+            tk=v[0];
+            for(int i=1;i<=n;i++)
+            {
+                if(tk==a[i])
+                {res=i;
+                break;}
+            }
+        }
+        cout<<res<<endl;
+        
     }
-	return 0; 
-} 
+    return 0;
+}
